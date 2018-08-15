@@ -1,0 +1,32 @@
+easy-jest
+---
+
+Jest util for lazy person like me to generate mass test snapshots with few configurations.
+*It only supports function test now*
+
+
+# How does it work?
+
+First of all, testing is to verify input samples will always match corresponding output.
+To know what is the correct output, you need either calculate by yourself, or capture the *snapshot* of correct output. Which is an owesome feature introduced by jest.
+
+For functions, input is simply a set of arguments. So why not I just provide a list of valid or invalid cases, and let JS to generate all the combinations as test cases and capture snapshot?
+
+To be strict like lab experiments, I choose to test a function in following way:
+* If no compulsory args, test function with empty arguments: `func()`
+* If there are compulsory args, test together with invalid case for one of the args, and valid cases for the rest. Like this:
+  - `func(invalid, valid)`
+  - `func(valid, invalid)`
+* If there are optional args, test in above way by add in optional args one by one. Like this:
+  - `func(compulsory_invalid, compulsory_valid, optional_valid)`
+  - `func(compulsory_valid, compulsory_invalid, optional_valid)`
+  - `func(compulsory_valid, compulsory_valid, optional_invalid)`
+  - `func(compulsory_invalid, compulsory_valid, optional_valid, optional_valid)`
+  - `func(compulsory_valid, compulsory_invalid, optional_valid, optional_valid)`
+  - `func(compulsory_valid, compulsory_valid, optional_invalid, optional_valid)`
+  - `func(compulsory_valid, compulsory_valid, optional_valid, optional_invalid)`
+* And then test all the valid combinations
+
+# API
+
+{{>main}}
