@@ -1,5 +1,6 @@
 // @flow
 import type { Case, ArgConfig } from '../index.flow';
+import type {ArgsConfig} from './configArgs';
 import { default as enumerateCases, appendArgCases } from './enumerateCases';
 
 type ObjectCase = { [key: string]: Case };
@@ -31,8 +32,14 @@ const extendObjectCase = (key: string) => {
  * @return {Array<Object>}
  */
 
-const getTestCases = (key: string) => enumerateCases(extendObjectCase(key));
-const appendTestCases = (key: string) => appendArgCases(extendObjectCase(key));
+ /**
+  * @private
+  */
+const getTestCases = (key: string) => enumerateCases.bind(null, extendObjectCase(key));
+/**
+  * @private
+  */
+const appendTestCases = (key: string) => appendArgCases.bind(null, extendObjectCase(key));
 
 /**
  * A helper to generate object test cases by provided configurations
@@ -67,9 +74,9 @@ const appendTestCases = (key: string) => appendArgCases(extendObjectCase(key));
  * //   ]
  * // }
  */
-const makeObjectArg = (propsConfig: ArgConfig[]) => {
-  const compulsoryProps = propsConfig.filter(conf => !conf.optional);
-  const optionalProps = propsConfig.filter(conf => conf.optional);
+const makeObjectArg = (propsConfig: ArgsConfig) => {
+  const compulsoryProps = propsConfig.value.filter(conf => !conf.optional);
+  const optionalProps = propsConfig.value.filter(conf => conf.optional);
   let compulsoryValidCases = [];
   let compulsoryInvalidCases = [];
   compulsoryProps.forEach(({ name }, i) => {
@@ -85,9 +92,11 @@ const makeObjectArg = (propsConfig: ArgConfig[]) => {
   let optionalInvalidCases = [];
   optionalProps.forEach(({ name, invalidCases, validCases }) => {
     const append = appendTestCases(name);
-    optionalInvalidCases = optionalInvalidCases.concat(
-      append(compulsoryValidCases, invalidCases)
-    );
+    if (invalidCases) {
+      optionalInvalidCases = optionalInvalidCases.concat(
+        append(compulsoryValidCases, invalidCases)
+      );
+    }
     optionalValidCases = optionalValidCases.concat(
       append(compulsoryValidCases, validCases)
     );

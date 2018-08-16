@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`configObjectArg empty object 1`] = `
+Object {
+  "invalidCases": Array [],
+  "validCases": Array [],
+}
+`;
+
+exports[`configObjectArg multiple properties, has invalid cases 1`] = `
+Object {
+  "invalidCases": Array [
+    Object {
+      "b": null,
+    },
+  ],
+  "validCases": Array [
+    Object {
+      "invalidCases": undefined,
+      "name": "a",
+      "optional": false,
+      "validCases": Array [
+        1,
+      ],
+    },
+    Object {
+      "invalidCases": Array [
+        null,
+      ],
+      "name": "b",
+      "optional": false,
+      "validCases": Array [
+        0,
+      ],
+    },
+  ],
+}
+`;
+
+exports[`configObjectArg multiple properties, has optional 1`] = `
+Object {
+  "invalidCases": Array [],
+  "validCases": Array [
+    Object {
+      "invalidCases": undefined,
+      "name": "a",
+      "optional": false,
+      "validCases": Array [
+        1,
+      ],
+    },
+    Object {
+      "a": 1,
+      "b": 0,
+    },
+    Object {
+      "a": 1,
+      "b": undefined,
+    },
+  ],
+}
+`;
+
+exports[`configObjectArg multiple properties, no optional 1`] = `
+Object {
+  "invalidCases": Array [],
+  "validCases": Array [
+    Object {
+      "invalidCases": undefined,
+      "name": "a",
+      "optional": false,
+      "validCases": Array [
+        1,
+      ],
+    },
+    Object {
+      "invalidCases": undefined,
+      "name": "b",
+      "optional": false,
+      "validCases": Array [
+        0,
+      ],
+    },
+  ],
+}
+`;
+
+exports[`configObjectArg single optional property 1`] = `
+Object {
+  "invalidCases": Array [],
+  "validCases": Array [
+    Object {
+      "a": 1,
+    },
+    Object {
+      "a": undefined,
+    },
+  ],
+}
+`;
+
+exports[`configObjectArg single property 1`] = `
+Object {
+  "invalidCases": Array [],
+  "validCases": Array [
+    Object {
+      "invalidCases": undefined,
+      "name": "a",
+      "optional": false,
+      "validCases": Array [
+        1,
+      ],
+    },
+  ],
+}
+`;
+
+exports[`configObjectArg single property has invalid cases 1`] = `
+Object {
+  "invalidCases": Array [
+    Object {
+      "a": null,
+    },
+  ],
+  "validCases": Array [
+    Object {
+      "invalidCases": Array [
+        null,
+      ],
+      "name": "a",
+      "optional": false,
+      "validCases": Array [
+        1,
+      ],
+    },
+  ],
+}
+`;

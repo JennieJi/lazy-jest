@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`enumerateArrayCases multiple arga, has invalid case 1`] = `
+Array [
+  Array [
+    null,
+    "haha",
+  ],
+  Array [
+    NaN,
+    "haha",
+  ],
+]
+`;
+
+exports[`enumerateArrayCases multiple arga, valid cases only 1`] = `
+Array [
+  Array [
+    1,
+    "haha",
+  ],
+  Array [
+    2,
+    "haha",
+  ],
+]
+`;
+
+exports[`enumerateArrayCases single arg, has invalid cases 1`] = `
+Array [
+  Array [
+    1,
+  ],
+  Array [
+    2,
+  ],
+]
+`;
+
+exports[`enumerateArrayCases single arg, has invalid cases 2`] = `
+Array [
+  Array [
+    null,
+  ],
+  Array [
+    NaN,
+  ],
+]
+`;
+
+exports[`enumerateArrayCases single arg, valid cases only 1`] = `
+Array [
+  Array [
+    1,
+  ],
+  Array [
+    2,
+  ],
+]
+`;

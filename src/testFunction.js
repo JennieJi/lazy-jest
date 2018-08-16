@@ -1,10 +1,16 @@
 // @flow
 import type { Case, ArgConfig } from './index.flow';
+import type { ArgsConfig } from './caseGenerator/configArgs';
 import { matchSnapshot } from './utils';
 import enumerateArrayCases from './caseGenerator/enumerateArrayCases';
 
 type ArgsCase = Case[];
 
+/**
+ * @private
+ * @param {Array.<*>} args 
+ * @return {string}
+ */
 const formatArgCaseDesc = (args: ArgsCase) => {
   const strArgs = args.map(arg => {
     if (typeof arg === 'undefined') {
@@ -21,12 +27,23 @@ const formatArgCaseDesc = (args: ArgsCase) => {
   return `- (${strArgs.join(',')})`;
 };
 
+/**
+ * @private
+ * @param {Function} func 
+ * @param {Array.<*>} args 
+ */
 const doTest = (func: Function, args: ArgsCase = []) => {
   describe(formatArgCaseDesc(args), () => {
     matchSnapshot(() => func(...args));
   });
 };
 
+/**
+ * 
+ * @param {Function} func 
+ * @param {Array.<Array.<*>>} [argsCases] 
+ * @param {string} [testCaption] 
+ */
 export const testFunction = (
   func: Function,
   argsCases?: ArgsCase[] = [],
@@ -77,7 +94,8 @@ const testValidArgs = (func: Function, argsConfig: ArgConfig[]) => {
  * - Test invalid cases by using arguments with one invalid argument, and first valid case for others
  * - Test all valid combinations of arguments
  * @param {Function} func Target function
- * @param {ArgConfig[]} argsConfig
+ * @param {ArgsConfig} argsConfig
+ * @param {string} [testCaption] Test description
  * @example
  * const emptyFunc = () => {};
  * enumerateArgsTestFunction(emptyFunc);
@@ -106,19 +124,19 @@ const testValidArgs = (func: Function, argsConfig: ArgConfig[]) => {
  */
 export const enumerateArgsTestFunction = (
   func: Function,
-  argsConfig: ArgConfig[],
+  argsConfig: ArgsConfig,
   testCaption?: string = `${func.name || 'function'}()`
 ) => {
-  let optionalStartIndex = argsConfig.length;
+  const CONF = argsConfig.value;
+  let optionalStartIndex = CONF.length;
   for (
-    let i = argsConfig.length;
-    --i && argsConfig[i] && argsConfig[i].optional;
-
+    let i = CONF.length;
+    --i && CONF[i] && CONF[i].optional;
   ) {
     optionalStartIndex = i;
   }
-  const optionalArgs = argsConfig.slice(optionalStartIndex);
-  const compulsoryArgs = argsConfig.slice(0, optionalStartIndex);
+  const optionalArgs = CONF.slice(optionalStartIndex);
+  const compulsoryArgs = CONF.slice(0, optionalStartIndex);
 
   describe(testCaption, () => {
     for (let n = optionalArgs.length + 1; n--; ) {

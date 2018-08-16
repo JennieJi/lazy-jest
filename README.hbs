@@ -4,15 +4,50 @@ easy-jest
 Jest util for lazy person like me to generate mass test snapshots with few configurations.
 *It only supports function test now*
 
+NOTE that please use it wisely, otherwise your snapshot will explode.
 
-# How does it work?
+# Quick start
+
+index.js
+```javascript
+export function testFunction(a, b) {
+  return a + b;
+}
+```
+
+index.test.js
+```javascript
+import { testFunction, enumerateArgsTestFunction, configArgs } from 'lazy-jest';
+import { targetFunction } from '.';
+
+// custom combinations
+testFunction(targetFunction, 
+  [
+    [1, 2],
+    [0, -1],
+    [0],
+    []
+  ], 
+  'custom combination test of targetFunction()'
+);
+
+// enumerate test
+const conf = 
+  configArgs()
+  .arg('a', [1, 0, -1])
+  .arg('b', [-1, 0.9], { invalidCases: [ null ] });
+enumerateArgsTestFunction(targetFunction, conf, 'enumerate test for targetFunction()');
+```
+
+
+# How does enumerate test work?
 
 First of all, testing is to verify input samples will always match corresponding output.
 To know what is the correct output, you need either calculate by yourself, or capture the *snapshot* of correct output. Which is an owesome feature introduced by jest.
 
 For functions, input is simply a set of arguments. So why not I just provide a list of valid or invalid cases, and let JS to generate all the combinations as test cases and capture snapshot?
 
-To be strict like lab experiments, I choose to test a function in following way:
+To be strict like lab experiments, I choose to test a function in following way (which I called enumerate test):
 * If no compulsory args, test function with empty arguments: `func()`
 * If there are compulsory args, test together with invalid case for one of the args, and valid cases for the rest. Like this:
   - `func(invalid, valid)`

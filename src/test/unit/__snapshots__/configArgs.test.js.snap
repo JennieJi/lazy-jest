@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`configArgs config 1 arg 1`] = `
+ArgsConfig {
+  "value": Array [
+    Object {
+      "invalidCases": undefined,
+      "name": "a",
+      "optional": true,
+      "validCases": Array [
+        1,
+        undefined,
+      ],
+    },
+  ],
+}
+`;
+
+exports[`configArgs config 2 args 1`] = `
+ArgsConfig {
+  "value": Array [
+    Object {
+      "invalidCases": undefined,
+      "name": "a",
+      "optional": false,
+      "validCases": Array [
+        1,
+      ],
+    },
+    Object {
+      "invalidCases": undefined,
+      "name": "b",
+      "optional": true,
+      "validCases": Array [
+        2,
+        undefined,
+      ],
+    },
+  ],
+}
+`;
+
+exports[`configArgs empty args 1`] = `
+ArgsConfig {
+  "value": Array [],
+}
+`;
+
+exports[`configArgs has initial config 1`] = `
+ArgsConfig {
+  "value": Array [
+    Object {
+      "invalidCases": undefined,
+      "name": "a",
+      "optional": false,
+      "validCases": Array [
+        1,
+      ],
+    },
+  ],
+}
+`;

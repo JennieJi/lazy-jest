@@ -1,5 +1,5 @@
 // @flow
-import type { Case, ArgConfig, AppendMethod } from '../index.flow';
+import type { Case, ArgConfig } from '../index.flow';
 import enumerateCases from './enumerateCases';
 
 /**
@@ -22,5 +22,11 @@ const extendArrayCase = (
     : [[nextItemCase]];
 };
 
-const enumerateArrayCases = enumerateCases(extendArrayCase);
+/**
+ * @see enumerateCases
+ * @param {ArgConfig[]} argsConfig
+ * @param {?number} invalidArgConfigIndex Index of arg in the config list to have invalid case. If this is not set, it will generate cases that all arguments are valid.
+ * @return {Array<Array<*>|Object>} 
+ */
+const enumerateArrayCases = enumerateCases.bind(null, extendArrayCase);
 export default enumerateArrayCases;
