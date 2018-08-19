@@ -33,7 +33,7 @@ const formatArgCaseDesc = (args: ArgsCase) => {
  * @param {Array.<*>} args 
  */
 const doTest = (func: Function, args: ArgsCase = []) => {
-  describe(formatArgCaseDesc(args), () => {
+  test(formatArgCaseDesc(args), () => {
     matchSnapshot(() => func(...args));
   });
 };
@@ -69,7 +69,7 @@ const testInvalidArgs = (func: Function, argsConfig: ArgConfig[]) => {
   const argNames = argsConfig.map(conf => conf.name);
   argsConfig.forEach((conf, i) => {
     const cases = enumerateArrayCases(argsConfig, i);
-    const testCaption = `${formatArgCaseDesc(argNames)}, ${conf.name} invalid`;
+    const testCaption = `${formatArgCaseDesc(argNames)}, argument <${conf.name}> is invalid`;
     testFunction(func, cases, testCaption);
   });
 };

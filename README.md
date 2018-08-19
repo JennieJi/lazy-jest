@@ -4,6 +4,8 @@ easy-jest
 Jest util for lazy person like me to generate mass test snapshots with few configurations.
 *It only supports function test now*
 
+NOTE that please use it wisely, otherwise your snapshot will explode.
+
 # Quick start
 
 index.js
