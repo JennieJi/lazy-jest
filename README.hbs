@@ -1,5 +1,10 @@
-easy-jest
+lazy-jest
 ---
+
+[![npm version](https://badge.fury.io/js/lazy-jest.svg)](https://badge.fury.io/js/lazy-jest)
+[![Build Status](https://travis-ci.org/JennieJi/lazy-jest.svg?branch=master)](https://travis-ci.org/JennieJi/lazy-jest)
+[![codecov](https://codecov.io/gh/JennieJi/lazy-jest/branch/master/graph/badge.svg)](https://codecov.io/gh/JennieJi/lazy-jest)
+
 
 Jest util for lazy person like me to generate mass test snapshots with few configurations.
 *It only supports function test now*
