@@ -3,5 +3,4 @@ node_modules/
 
 packages/**/*/lib
 coverage/
-lazy-jest.jest
-lazy-jest.js.map
+dist/
