@@ -7,7 +7,8 @@
     "prepublishOnly": "npm run docs & npm run build",
     "build": "WEBPACK_ENV=build webpack -p --display-error-details --config ./webpack.config.js",
     "docs": "jsdoc2md --template README.hbs 'src/**/*.js' > README.md --separators -c ./.jsdoc.json",
-    "test": "BABLE_ENV=test jest --env=node"
+    "test": "BABLE_ENV=test jest --env=node",
+    "coverage": "yarn test --coverage --coverageReporters=lcov"
   },
   "keywords": [
     "jest",
@@ -41,6 +42,13 @@
   "author": {
     "name": "Jennie Ji",
     "email": "jennie.ji@hotmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JennieJi/lazy-jest"
+  },
+  "bugs": {
+    "url": "https://github.com/JennieJi/lazy-jest/issues"
   },
   "jest": {
     "verbose": true,

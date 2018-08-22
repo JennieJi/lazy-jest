@@ -1,6 +1,7 @@
 node_modules/
-packages/**/*/lib
 
-# dist files
+
+packages/**/*/lib
+coverage/
 lazy-jest.jest
 lazy-jest.js.map
