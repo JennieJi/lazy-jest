@@ -24,7 +24,7 @@ export default [
 			{ file: pkg.modules, format: 'es' }
 		],
 		plugins: [
-			resolve(),
+			resolve({ modulesOnly: true }),
       babelPlugin,
 			commonjs(),
 			terser(),
