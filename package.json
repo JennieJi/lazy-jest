@@ -1,16 +1,16 @@
 {
   "name": "lazy-jest",
-  "version": "0.1.0-beta",
+  "version": "0.1.0-beta.1",
   "description": "Jest util for lazy person like me to generate mass test snapshots with few configurations.",
   "main": "dist/lazy-jest.js",
   "browser": "dist/lazy-jest.umd.js",
   "modules": "dist/lazy-jest.esm.js",
   "scripts": {
-    "prepublishOnly": "npm run docs & npm run build",
+    "prepublishOnly": "npm run docs & npm run build && yarn test",
     "build": "NODE_ENV=production rollup -c",
     "docs": "jsdoc2md --template README.hbs 'src/**/*.js' > README.md --separators -c ./.jsdoc.json",
     "test": "BABLE_ENV=test NODE_ENV=testing jest --env=node",
-    "coverage": "yarn test --coverage --coverageReporters=lcov"
+    "test:coverage": "yarn test --coverage --coverageReporters=lcov"
   },
   "keywords": [
     "jest",

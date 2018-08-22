@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`builds orignal 1`] = `
+Array [
+  "configArgs",
+  "configObjectArg",
+  "default",
+  "enumerateArgsTestFunction",
+  "enumerateArrayCases",
+  "enumerateCases",
+  "testFunction",
+]
+`;
+
+exports[`builds orignalDefault 1`] = `
+Array [
+  "configArgs",
+  "configObjectArg",
+  "enumerateArgsTestFunction",
+  "enumerateArrayCases",
+  "enumerateCases",
+  "testFunction",
+]
+`;
