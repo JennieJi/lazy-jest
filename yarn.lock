@@ -2628,7 +2628,7 @@ jsdoc-regex@^1.0.1:
 
 jsdoc-to-markdown@^4.0.1:
   version "4.0.1"
-  resolved "https://registry.yarnpkg.com/jsdoc-to-markdown/-/jsdoc-to-markdown-4.0.1.tgz#247f7d977ecc209428972ec92ca14bd4e610355d"
+  resolved "https://npm.garenanow.com/jsdoc-to-markdown/-/jsdoc-to-markdown-4.0.1.tgz#247f7d977ecc209428972ec92ca14bd4e610355d"
   dependencies:
     array-back "^2.0.0"
     command-line-tool "^0.8.0"

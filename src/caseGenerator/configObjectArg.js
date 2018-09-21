@@ -1,7 +1,8 @@
 // @flow
 import type { Case, ArgConfig } from '../index.flow';
-import type {ArgsConfig} from './configArgs';
+import type { Args } from './configArgs';
 import { default as enumerateCases, appendArgCases } from './enumerateCases';
+/** @module caseGenerator/configObjectArg */
 
 type ObjectCase = { [key: string]: Case };
 
@@ -34,31 +35,28 @@ const extendObjectCase = (key: string) => {
 
  /**
   * @private
+  * @param {string} key
+  * @return {Function}
   */
 const getTestCases = (key: string) => enumerateCases.bind(null, extendObjectCase(key));
 /**
-  * @private
-  */
+ * @private
+ * @param {string} key
+ * @return {Function}
+ */
 const appendTestCases = (key: string) => appendArgCases.bind(null, extendObjectCase(key));
 
 /**
  * A helper to generate object test cases by provided configurations
- * @param {ArgConfig} propsConfig
- * @return {{validCases: Array<Object>, invalidCases: Array<Object>}}
+ * @alias module:caseGenerator/configObjectArg
+ * @param {Args|ArgConfig[]} propsConfig
+ * @return {ArgConfig}
  * @example
- * makeObjectArg([
- *  {
- *    name: 'a',
- *    validCases: [1, 2],
- *    invalidCases: [NaN, 0]
- *  },
- *  {
- *    name: 'b',
- *    validCases: ['a'],
- *    invalidCases: ['', 1],
- *    optional: true
- *  }
- * ]);
+ * configObjectArg(
+ *  configArgs()
+ *  .arg('a', [1, 2], { invalidCases: [NaN, 0] })
+ *  .arg('b', ['a'], { invalidCases: ['', 1], optional: true })
+ * );
  * // Result:
  * // {
  * //   validCases: [
@@ -74,9 +72,10 @@ const appendTestCases = (key: string) => appendArgCases.bind(null, extendObjectC
  * //   ]
  * // }
  */
-const makeObjectArg = (propsConfig: ArgsConfig) => {
-  const compulsoryProps = propsConfig.value.filter(conf => !conf.optional);
-  const optionalProps = propsConfig.value.filter(conf => conf.optional);
+const configObjectArg = (propsConfig: Args | ArgConfig[]) => {
+  const props = Array.isArray(propsConfig) ? propsConfig : propsConfig.value;
+  const compulsoryProps = props.filter(conf => !conf.optional);
+  const optionalProps = props.filter(conf => conf.optional);
   let compulsoryValidCases = [];
   let compulsoryInvalidCases = [];
   compulsoryProps.forEach(({ name }, i) => {
@@ -107,4 +106,4 @@ const makeObjectArg = (propsConfig: ArgsConfig) => {
   };
 };
 
-export default makeObjectArg;
+export default configObjectArg;

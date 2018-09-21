@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`configArgs config 1 arg 1`] = `
-ArgsConfig {
+Args {
   "value": Array [
     Object {
       "invalidCases": undefined,
@@ -17,7 +17,7 @@ ArgsConfig {
 `;
 
 exports[`configArgs config 2 args 1`] = `
-ArgsConfig {
+Args {
   "value": Array [
     Object {
       "invalidCases": undefined,
@@ -41,13 +41,13 @@ ArgsConfig {
 `;
 
 exports[`configArgs empty args 1`] = `
-ArgsConfig {
+Args {
   "value": Array [],
 }
 `;
 
 exports[`configArgs has initial config 1`] = `
-ArgsConfig {
+Args {
   "value": Array [
     Object {
       "invalidCases": undefined,

@@ -8,7 +8,7 @@
   "scripts": {
     "prepublishOnly": "npm run docs & npm run build && yarn test",
     "build": "NODE_ENV=production rollup -c",
-    "docs": "jsdoc2md --template README.hbs 'src/**/*.js' > README.md --separators -c ./.jsdoc.json",
+    "docs": "NODE_ENV=docs jsdoc2md --template README.hbs 'src/**/*.js' > README.md --separators -c ./.jsdoc.json",
     "test": "BABLE_ENV=test NODE_ENV=testing jest --env=node",
     "test:coverage": "yarn test --coverage --coverageReporters=lcov"
   },

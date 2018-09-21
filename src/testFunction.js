@@ -1,8 +1,9 @@
 // @flow
 import type { Case, ArgConfig } from './index.flow';
-import type { ArgsConfig } from './caseGenerator/configArgs';
+import type { Args } from './caseGenerator/configArgs';
 import { matchSnapshot } from './utils';
 import enumerateArrayCases from './caseGenerator/enumerateArrayCases';
+/** @module testFunction */
 
 type ArgsCase = Case[];
 
@@ -43,6 +44,13 @@ const doTest = (func: Function, args: ArgsCase = []) => {
  * @param {Function} func 
  * @param {Array.<Array.<*>>} [argsCases] 
  * @param {string} [testCaption] 
+ * @example
+ * testFunction(targetFunction, [
+ *  [1, 2],
+ *  [0, -1],
+ *  [0], 
+ *  []
+ * ], 'custom combination test of targetFunction()');
  */
 export const testFunction = (
   func: Function,
@@ -94,40 +102,43 @@ const testValidArgs = (func: Function, argsConfig: ArgConfig[]) => {
  * - Test invalid cases by using arguments with one invalid argument, and first valid case for others
  * - Test all valid combinations of arguments
  * @param {Function} func Target function
- * @param {ArgsConfig} argsConfig
+ * @param {Args|ArgConfig[]} argsConfig
  * @param {string} [testCaption] Test description
  * @example
  * const emptyFunc = () => {};
  * enumerateArgsTestFunction(emptyFunc);
  *
  * const simpleFunc = (param) => param;
- * enumerateArgsTestFunction(simpleFunc, [
- *  { name:'param', validCases: [1], invalidCases: [0]  }
+ * enumerateArgsTestFunction(
+ *   simpleFunc, 
+ *   configArgs().arg('param', [1], { invalidCases: [0] })
  * ]);
  *
  * const funcHasOptional = (param, opts) => opts || param;
- * enumerateArgsTestFunction(funcHasOpts, [
- *  { name:'param', validCases: [1], invalidCases: [0]  }
- *  { name:'opts', validCases: [2], invalidCases: [0], optional: true  }
- * ]);
+ * enumerateArgsTestFunction(
+ *  funcHasOpts, 
+ *  configArgs()
+ *    .arg('param', [1], { invalidCases: [0] })
+ *    .arg('opts', [2], { invalidCases: [0], optional: true })
+ * );
  *
  * const complexFunc = ({ param, opts }) => opts || param;
- * enumerateArgsTestFunction(funcHasOpts, [
- *  {
- *    ...makeObjectCases([
- *      { name:'param', validCases: [1], invalidCases: [0]  }
- *      { name:'opts', validCases: [2], invalidCases: [0], optional: true  }
- *    ]},
- *    name: 'argument1'
- *  }
- * ]);
+ * enumerateArgsTestFunction(
+ *   funcHasOpts, 
+ *   configArgs().objectArg(
+ *     'param',
+ *     configArgs()
+ *       .arg('param', [1], { invalidCases: [0] })
+ *       .arg('opts', [2], { invalidCases: [0], optional: true })
+ *   )
+ * );
  */
 export const enumerateArgsTestFunction = (
   func: Function,
-  argsConfig: ArgsConfig,
+  argsConfig: Args | ArgConfig[],
   testCaption?: string = `${func.name || 'function'}()`
 ) => {
-  const CONF = argsConfig.value;
+  const CONF = Array.isArray(argsConfig) ? argsConfig : argsConfig.value;
   let optionalStartIndex = CONF.length;
   for (
     let i = CONF.length;

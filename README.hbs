@@ -39,8 +39,8 @@ testFunction(targetFunction,
 // enumerate test
 const conf = 
   configArgs()
-  .arg('a', [1, 0, -1])
-  .arg('b', [-1, 0.9], { invalidCases: [ null ] });
+    .arg('a', [1, 0, -1])
+    .arg('b', [-1, 0.9], { invalidCases: [ null ] });
 enumerateArgsTestFunction(targetFunction, conf, 'enumerate test for targetFunction()');
 ```
 
