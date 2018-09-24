@@ -1,6 +1,7 @@
 // @flow
 import type { Case, ArgConfig } from '../index.flow';
 import enumerateCases from './enumerateCases';
+/** @module caseGenerator/enumerateArrayCases */
 
 /**
  * Append a value to the end of each array of a list.
@@ -23,6 +24,7 @@ const extendArrayCase = (
 };
 
 /**
+ * @alias module:caseGenerator/enumerateArrayCases
  * @see enumerateCases
  * @param {ArgConfig[]} argsConfig
  * @param {?number} invalidArgConfigIndex Index of arg in the config list to have invalid case. If this is not set, it will generate cases that all arguments are valid.

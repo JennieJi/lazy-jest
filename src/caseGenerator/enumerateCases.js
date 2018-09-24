@@ -1,8 +1,10 @@
 // @flow
 import type { ArgConfig } from '../index.flow';
+/** @module caseGenerator/enumerateCases */
 
 /**
  * Extend cases with a list of new cases by given method.
+ * @private
  * @param {appendMethod} appendMethod This method will receive 2 input: existing case list, case value to extend. And should return extended case list.
  * @param {Array<Array<*>|Object>} cases
  * @param {Array<*>} nextArgCases
@@ -24,6 +26,7 @@ export const appendArgCases = <C>(
 
 /**
  * Generate cases by given configuration
+ * @alias module:caseGenerator/enumerateCases
  * @param {appendMethod} appendMethod This method will receive 2 input: existing case list, case value to extend. And should return extended case list.
  * @param {ArgConfig[]} argsConfig
  * @param {?number} invalidArgConfigIndex Index of arg in the config list to have invalid case. If this is not set, it will generate cases that all arguments are valid.

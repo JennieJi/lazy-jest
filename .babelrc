@@ -1,6 +1,47 @@
 {
-  "presets": [
-    ["es2015"]
+  "ignore": [
+    "node_modules/**"
   ],
-  "plugins": ["transform-flow-strip-types", "transform-object-rest-spread"]
+  "env": {
+    "production": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": ["last 2 versions", "safari >= 7"]
+            },
+            "modules": false
+          }
+        ]
+      ],
+      "plugins": [
+        "transform-flow-strip-types",
+        "transform-object-rest-spread",
+        "external-helpers"
+      ]
+    },
+    "testing": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": ["last 2 versions", "safari >= 7"]
+            }
+          }
+        ]
+      ],
+      "plugins": [
+        "transform-flow-strip-types",
+        "transform-object-rest-spread"
+      ]
+    },
+    "docs": {
+      "plugins": [
+        "transform-flow-strip-types",
+        "transform-object-rest-spread"
+      ]
+    }
+  }
 }

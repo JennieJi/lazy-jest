@@ -39,8 +39,8 @@ testFunction(targetFunction,
 // enumerate test
 const conf = 
   configArgs()
-  .arg('a', [1, 0, -1])
-  .arg('b', [-1, 0.9], { invalidCases: [ null ] });
+    .arg('a', [1, 0, -1])
+    .arg('b', [-1, 0.9], { invalidCases: [ null ] });
 enumerateArgsTestFunction(targetFunction, conf, 'enumerate test for targetFunction()');
 ```
 
@@ -69,64 +69,51 @@ To be strict like lab experiments, I choose to test a function in following way 
 
 # API
 
-## Members
+## Modules
 
 <dl>
-<dt><a href="#ArgsConfig">ArgsConfig</a></dt>
-<dd><p>Helper for generate ArgConfig</p>
-</dd>
-<dt><a href="#enumerateArrayCases">enumerateArrayCases</a> ⇒ <code>Array.&lt;(Array.&lt;*&gt;|Object)&gt;</code></dt>
+<dt><a href="#module_caseGenerator/configArgs">caseGenerator/configArgs</a></dt>
 <dd></dd>
-<dt><a href="#appendArgCases">appendArgCases</a> ⇒ <code>Array.&lt;(Array.&lt;*&gt;|Object)&gt;</code></dt>
-<dd><p>Extend cases with a list of new cases by given method.</p>
-</dd>
-<dt><a href="#testFunction">testFunction</a></dt>
+<dt><a href="#module_caseGenerator/configObjectArg">caseGenerator/configObjectArg</a></dt>
 <dd></dd>
-<dt><a href="#enumerateArgsTestFunction">enumerateArgsTestFunction</a></dt>
-<dd><p>Catch snapshot of a function. It will do following tests:</p>
-<ul>
-<li>If no compulsory arguments defined, it will test empty argument case</li>
-<li>Test compulsory arguments first, and add in optional argument test cases one by one</li>
-<li>Test invalid cases by using arguments with one invalid argument, and first valid case for others</li>
-<li>Test all valid combinations of arguments</li>
-</ul>
-</dd>
-</dl>
-
-## Functions
-
-<dl>
-<dt><a href="#makeObjectArg">makeObjectArg(propsConfig)</a> ⇒ <code>Object</code></dt>
-<dd><p>A helper to generate object test cases by provided configurations</p>
-</dd>
-<dt><a href="#enumerateCases">enumerateCases(appendMethod, argsConfig, invalidArgConfigIndex)</a> ⇒ <code>Array.&lt;(Array.&lt;*&gt;|Object)&gt;</code></dt>
-<dd><p>Generate cases by given configuration</p>
-</dd>
+<dt><a href="#module_caseGenerator/enumerateArrayCases">caseGenerator/enumerateArrayCases</a></dt>
+<dd></dd>
+<dt><a href="#module_caseGenerator/enumerateCases">caseGenerator/enumerateCases</a></dt>
+<dd></dd>
+<dt><a href="#module_testFunction">testFunction</a></dt>
+<dd></dd>
 </dl>
 
 ## Typedefs
 
 <dl>
-<dt><a href="#appendMethod">appendMethod</a> ⇒ <code>Array.&lt;(Array.&lt;*&gt;|Object)&gt;</code></dt>
-<dd></dd>
 <dt><a href="#ArgConfig">ArgConfig</a> : <code>Object</code></dt>
 <dd></dd>
 </dl>
 
-<a name="ArgsConfig"></a>
+<a name="module_caseGenerator/configArgs"></a>
 
-## ArgsConfig
-Helper for generate ArgConfig
+## caseGenerator/configArgs
 
-**Kind**: global variable  
-**Access**: protected  
+* [caseGenerator/configArgs](#module_caseGenerator/configArgs)
+    * [configArgs(initialConfig)](#exp_module_caseGenerator/configArgs--configArgs) ⇒ [<code>exports.Args</code>](#new_module_caseGenerator/configArgs--configArgs.Args_new) ⏏
+        * [.Args](#module_caseGenerator/configArgs--configArgs.Args)
+            * [new exports.Args(initialConfig)](#new_module_caseGenerator/configArgs--configArgs.Args_new)
+            * [.arg(name, validCases, [opts])](#module_caseGenerator/configArgs--configArgs.Args+arg) ⇒ <code>this</code>
+            * [.objectArg(name, propsConfig, [opts])](#module_caseGenerator/configArgs--configArgs.Args+objectArg) ⇒ <code>this</code>
+
 
 * * *
 
-<a name="ArgsConfig+configArgs"></a>
+<a name="exp_module_caseGenerator/configArgs--configArgs"></a>
 
-### argsConfig.configArgs()
-**Kind**: instance method of [<code>ArgsConfig</code>](#ArgsConfig)  
+### configArgs(initialConfig) ⇒ [<code>exports.Args</code>](#new_module_caseGenerator/configArgs--configArgs.Args_new) ⏏
+**Kind**: Exported function  
+
+| Param | Type |
+| --- | --- |
+| initialConfig | [<code>Array.&lt;ArgConfig&gt;</code>](#ArgConfig) | 
+
 **Example**  
 ```js
 // example ArgConfig for `func(a, b) {}`
@@ -137,128 +124,101 @@ configArgs()
 
 * * *
 
-<a name="enumerateArrayCases"></a>
+<a name="module_caseGenerator/configArgs--configArgs.Args"></a>
 
-## enumerateArrayCases ⇒ <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code>
-**Kind**: global variable  
-**See**: enumerateCases  
+#### configArgs.Args
+Class for argument configurations
 
-| Param | Type | Description |
-| --- | --- | --- |
-| argsConfig | [<code>Array.&lt;ArgConfig&gt;</code>](#ArgConfig) |  |
-| invalidArgConfigIndex | <code>number</code> | Index of arg in the config list to have invalid case. If this is not set, it will generate cases that all arguments are valid. |
+**Kind**: static class of [<code>configArgs</code>](#exp_module_caseGenerator/configArgs--configArgs)  
 
+* [.Args](#module_caseGenerator/configArgs--configArgs.Args)
+    * [new exports.Args(initialConfig)](#new_module_caseGenerator/configArgs--configArgs.Args_new)
+    * [.arg(name, validCases, [opts])](#module_caseGenerator/configArgs--configArgs.Args+arg) ⇒ <code>this</code>
+    * [.objectArg(name, propsConfig, [opts])](#module_caseGenerator/configArgs--configArgs.Args+objectArg) ⇒ <code>this</code>
 
-* * *
-
-<a name="appendArgCases"></a>
-
-## appendArgCases ⇒ <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code>
-Extend cases with a list of new cases by given method.
-
-**Kind**: global variable  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| appendMethod | [<code>appendMethod</code>](#appendMethod) | This method will receive 2 input: existing case list, case value to extend. And should return extended case list. |
-| cases | <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code> |  |
-| nextArgCases | <code>Array.&lt;\*&gt;</code> |  |
-
-**Example**  
-```js
-appendArgCases(extendArrayCase, [], [2, 3]);  // Result: [[2], [3]],
-appendArgCases(extendArrayCase, [[0], [1]], [2, 3]);  // Result: [[0, 2], [1, 2], [1, 2], [1, 3]],
-```
 
 * * *
 
-<a name="testFunction"></a>
+<a name="new_module_caseGenerator/configArgs--configArgs.Args_new"></a>
 
-## testFunction
-**Kind**: global variable  
+##### new exports.Args(initialConfig)
 
 | Param | Type |
 | --- | --- |
-| func | <code>function</code> | 
-| [argsCases] | <code>Array.&lt;Array.&lt;\*&gt;&gt;</code> | 
-| [testCaption] | <code>string</code> | 
+| initialConfig | [<code>Array.&lt;ArgConfig&gt;</code>](#ArgConfig) | 
 
 
 * * *
 
-<a name="enumerateArgsTestFunction"></a>
+<a name="module_caseGenerator/configArgs--configArgs.Args+arg"></a>
 
-## enumerateArgsTestFunction
-Catch snapshot of a function. It will do following tests:
-- If no compulsory arguments defined, it will test empty argument case
-- Test compulsory arguments first, and add in optional argument test cases one by one
-- Test invalid cases by using arguments with one invalid argument, and first valid case for others
-- Test all valid combinations of arguments
+##### args.arg(name, validCases, [opts]) ⇒ <code>this</code>
+Add an argument
 
-**Kind**: global variable  
+**Kind**: instance method of [<code>Args</code>](#module_caseGenerator/configArgs--configArgs.Args)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| func | <code>function</code> | Target function |
-| argsConfig | [<code>ArgsConfig</code>](#ArgsConfig) |  |
-| [testCaption] | <code>string</code> | Test description |
+| name | <code>string</code> |  |
+| validCases | <code>Array.&lt;\*&gt;</code> | valid test cases for this argument |
+| [opts] | <code>Object.&lt;string, \*&gt;</code> | other options |
 
-**Example**  
-```js
-const emptyFunc = () => {};
-enumerateArgsTestFunction(emptyFunc);
+**Properties**
 
-const simpleFunc = (param) => param;
-enumerateArgsTestFunction(simpleFunc, [
- { name:'param', validCases: [1], invalidCases: [0]  }
-]);
+| Name | Type | Description |
+| --- | --- | --- |
+| [opts.optional] | <code>boolean</code> | flag to indicate whether this argument is optional |
+| [opts.invalidCases] | <code>Array.&lt;\*&gt;</code> | invalid test cases for thsi argument |
 
-const funcHasOptional = (param, opts) => opts || param;
-enumerateArgsTestFunction(funcHasOpts, [
- { name:'param', validCases: [1], invalidCases: [0]  }
- { name:'opts', validCases: [2], invalidCases: [0], optional: true  }
-]);
-
-const complexFunc = ({ param, opts }) => opts || param;
-enumerateArgsTestFunction(funcHasOpts, [
- {
-   ...makeObjectCases([
-     { name:'param', validCases: [1], invalidCases: [0]  }
-     { name:'opts', validCases: [2], invalidCases: [0], optional: true  }
-   ]},
-   name: 'argument1'
- }
-]);
-```
 
 * * *
 
-<a name="makeObjectArg"></a>
+<a name="module_caseGenerator/configArgs--configArgs.Args+objectArg"></a>
 
-## makeObjectArg(propsConfig) ⇒ <code>Object</code>
+##### args.objectArg(name, propsConfig, [opts]) ⇒ <code>this</code>
+Add an object type argument
+
+**Kind**: instance method of [<code>Args</code>](#module_caseGenerator/configArgs--configArgs.Args)  
+
+| Param | Type |
+| --- | --- |
+| name | <code>string</code> | 
+| propsConfig | <code>Args</code> \| [<code>Array.&lt;ArgConfig&gt;</code>](#ArgConfig) | 
+| [opts] | <code>Object.&lt;string, \*&gt;</code> | 
+
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| [opts.optional] | <code>boolean</code> | 
+
+
+* * *
+
+<a name="module_caseGenerator/configObjectArg"></a>
+
+## caseGenerator/configObjectArg
+
+* * *
+
+<a name="exp_module_caseGenerator/configObjectArg--configObjectArg"></a>
+
+### configObjectArg(propsConfig) ⇒ [<code>ArgConfig</code>](#ArgConfig) ⏏
 A helper to generate object test cases by provided configurations
 
-**Kind**: global function  
+**Kind**: Exported function  
 
 | Param | Type |
 | --- | --- |
-| propsConfig | [<code>ArgConfig</code>](#ArgConfig) | 
+| propsConfig | <code>Args</code> \| [<code>Array.&lt;ArgConfig&gt;</code>](#ArgConfig) | 
 
 **Example**  
 ```js
-makeObjectArg([
- {
-   name: 'a',
-   validCases: [1, 2],
-   invalidCases: [NaN, 0]
- },
- {
-   name: 'b',
-   validCases: ['a'],
-   invalidCases: ['', 1],
-   optional: true
- }
-]);
+configObjectArg(
+ configArgs()
+ .arg('a', [1, 2], { invalidCases: [NaN, 0] })
+ .arg('b', ['a'], { invalidCases: ['', 1], optional: true })
+);
 // Result:
 // {
 //   validCases: [
@@ -277,16 +237,47 @@ makeObjectArg([
 
 * * *
 
-<a name="enumerateCases"></a>
+<a name="module_caseGenerator/enumerateArrayCases"></a>
 
-## enumerateCases(appendMethod, argsConfig, invalidArgConfigIndex) ⇒ <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code>
-Generate cases by given configuration
+## caseGenerator/enumerateArrayCases
 
-**Kind**: global function  
+* * *
+
+<a name="exp_module_caseGenerator/enumerateArrayCases--enumerateArrayCases"></a>
+
+### enumerateArrayCases ⇒ <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code> ⏏
+**Kind**: Exported constant  
+**See**: enumerateCases  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| appendMethod | [<code>appendMethod</code>](#appendMethod) | This method will receive 2 input: existing case list, case value to extend. And should return extended case list. |
+| argsConfig | [<code>Array.&lt;ArgConfig&gt;</code>](#ArgConfig) |  |
+| invalidArgConfigIndex | <code>number</code> | Index of arg in the config list to have invalid case. If this is not set, it will generate cases that all arguments are valid. |
+
+
+* * *
+
+<a name="module_caseGenerator/enumerateCases"></a>
+
+## caseGenerator/enumerateCases
+
+* [caseGenerator/enumerateCases](#module_caseGenerator/enumerateCases)
+    * [enumerateCases(appendMethod, argsConfig, invalidArgConfigIndex)](#exp_module_caseGenerator/enumerateCases--enumerateCases) ⇒ <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code> ⏏
+        * [~appendMethod](#module_caseGenerator/enumerateCases--enumerateCases..appendMethod) ⇒ <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code>
+
+
+* * *
+
+<a name="exp_module_caseGenerator/enumerateCases--enumerateCases"></a>
+
+### enumerateCases(appendMethod, argsConfig, invalidArgConfigIndex) ⇒ <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code> ⏏
+Generate cases by given configuration
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| appendMethod | <code>appendMethod</code> | This method will receive 2 input: existing case list, case value to extend. And should return extended case list. |
 | argsConfig | [<code>Array.&lt;ArgConfig&gt;</code>](#ArgConfig) |  |
 | invalidArgConfigIndex | <code>number</code> | Index of arg in the config list to have invalid case. If this is not set, it will generate cases that all arguments are valid. |
 
@@ -319,16 +310,100 @@ enumerateCases(extendArrayCase, [
 
 * * *
 
-<a name="appendMethod"></a>
+<a name="module_caseGenerator/enumerateCases--enumerateCases..appendMethod"></a>
 
-## appendMethod ⇒ <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code>
-**Kind**: global typedef  
+#### enumerateCases~appendMethod ⇒ <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code>
+**Kind**: inner typedef of [<code>enumerateCases</code>](#exp_module_caseGenerator/enumerateCases--enumerateCases)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | cases | <code>Array.&lt;(Array.&lt;\*&gt;\|Object)&gt;</code> | generated cases |
 | nextArgCase | <code>\*</code> |  |
 
+
+* * *
+
+<a name="module_testFunction"></a>
+
+## testFunction
+
+* [testFunction](#module_testFunction)
+    * [.testFunction](#module_testFunction.testFunction)
+    * [.enumerateArgsTestFunction](#module_testFunction.enumerateArgsTestFunction)
+
+
+* * *
+
+<a name="module_testFunction.testFunction"></a>
+
+### testFunction.testFunction
+**Kind**: static constant of [<code>testFunction</code>](#module_testFunction)  
+
+| Param | Type |
+| --- | --- |
+| func | <code>function</code> | 
+| [argsCases] | <code>Array.&lt;Array.&lt;\*&gt;&gt;</code> | 
+| [testCaption] | <code>string</code> | 
+
+**Example**  
+```js
+testFunction(targetFunction, [
+ [1, 2],
+ [0, -1],
+ [0], 
+ []
+], 'custom combination test of targetFunction()');
+```
+
+* * *
+
+<a name="module_testFunction.enumerateArgsTestFunction"></a>
+
+### testFunction.enumerateArgsTestFunction
+Catch snapshot of a function. It will do following tests:
+- If no compulsory arguments defined, it will test empty argument case
+- Test compulsory arguments first, and add in optional argument test cases one by one
+- Test invalid cases by using arguments with one invalid argument, and first valid case for others
+- Test all valid combinations of arguments
+
+**Kind**: static constant of [<code>testFunction</code>](#module_testFunction)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| func | <code>function</code> | Target function |
+| argsConfig | <code>Args</code> \| [<code>Array.&lt;ArgConfig&gt;</code>](#ArgConfig) |  |
+| [testCaption] | <code>string</code> | Test description |
+
+**Example**  
+```js
+const emptyFunc = () => {};
+enumerateArgsTestFunction(emptyFunc);
+
+const simpleFunc = (param) => param;
+enumerateArgsTestFunction(
+  simpleFunc, 
+  configArgs().arg('param', [1], { invalidCases: [0] })
+]);
+
+const funcHasOptional = (param, opts) => opts || param;
+enumerateArgsTestFunction(
+ funcHasOpts, 
+ configArgs()
+   .arg('param', [1], { invalidCases: [0] })
+   .arg('opts', [2], { invalidCases: [0], optional: true })
+);
+
+const complexFunc = ({ param, opts }) => opts || param;
+enumerateArgsTestFunction(
+  funcHasOpts, 
+  configArgs().objectArg(
+    'param',
+    configArgs()
+      .arg('param', [1], { invalidCases: [0] })
+      .arg('opts', [2], { invalidCases: [0], optional: true })
+  )
+);
+```
 
 * * *
 
