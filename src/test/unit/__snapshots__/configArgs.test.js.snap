@@ -40,6 +40,34 @@ Args {
 }
 `;
 
+exports[`configArgs config object args 1`] = `
+Args {
+  "value": Array [
+    Object {
+      "invalidCases": Array [],
+      "name": "a",
+      "optional": true,
+      "validCases": Array [
+        Object {
+          "invalidCases": Array [],
+          "name": "b",
+          "validCases": Array [
+            Object {
+              "invalidCases": undefined,
+              "name": "c",
+              "optional": false,
+              "validCases": Array [
+                1,
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
+`;
+
 exports[`configArgs empty args 1`] = `
 Args {
   "value": Array [],
@@ -55,6 +83,38 @@ Args {
       "optional": false,
       "validCases": Array [
         1,
+      ],
+    },
+  ],
+}
+`;
+
+exports[`configArgs validate args add undefined to valid case 1`] = `
+Args {
+  "value": Array [
+    Object {
+      "invalidCases": undefined,
+      "name": "a",
+      "optional": true,
+      "validCases": Array [
+        1,
+        undefined,
+      ],
+    },
+  ],
+}
+`;
+
+exports[`configArgs validate args add undefined to valid case 2`] = `
+Args {
+  "value": Array [
+    Object {
+      "invalidCases": undefined,
+      "name": "a",
+      "optional": true,
+      "validCases": Array [
+        1,
+        undefined,
       ],
     },
   ],

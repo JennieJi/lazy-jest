@@ -18,6 +18,10 @@ describe('configObjectArg', () => {
     expect(configObjectArg(configArgs().arg('a', [1], { optional: true }))).toMatchSnapshot();
   });
 
+  test('optional property has invalid cases', () => {
+    expect(configObjectArg(configArgs().arg('a', [1], { optional: true, invalidCases: [null] }))).toMatchSnapshot();
+  });
+
   test('multiple properties, no optional', () => {
     expect(configObjectArg(
       configArgs()
@@ -40,5 +44,12 @@ describe('configObjectArg', () => {
       .arg('a', [1])
       .arg('b', [0], { invalidCases: [null] })
     )).toMatchSnapshot();
+  });
+
+  test('multiple properties in array', () => {
+    expect(configObjectArg([
+      { name: 'a', validCases: [1] },
+      { name: 'b', validCases: [0] }
+    ])).toMatchSnapshot();
   });
 });

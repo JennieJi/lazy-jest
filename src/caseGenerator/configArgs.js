@@ -22,7 +22,7 @@ const validateArgConfig = (argConfig: ArgConfig) => {
   }
   return {
     optional: !!optional,
-    name: name || 'argument',
+    name,
     validCases,
     invalidCases
   };

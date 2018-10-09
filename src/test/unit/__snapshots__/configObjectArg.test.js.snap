@@ -7,6 +7,26 @@ Object {
 }
 `;
 
+exports[`configObjectArg multiple properties in array 1`] = `
+Object {
+  "invalidCases": Array [],
+  "validCases": Array [
+    Object {
+      "name": "a",
+      "validCases": Array [
+        1,
+      ],
+    },
+    Object {
+      "name": "b",
+      "validCases": Array [
+        0,
+      ],
+    },
+  ],
+}
+`;
+
 exports[`configObjectArg multiple properties, has invalid cases 1`] = `
 Object {
   "invalidCases": Array [
@@ -80,6 +100,24 @@ Object {
       "validCases": Array [
         0,
       ],
+    },
+  ],
+}
+`;
+
+exports[`configObjectArg optional property has invalid cases 1`] = `
+Object {
+  "invalidCases": Array [
+    Object {
+      "a": null,
+    },
+  ],
+  "validCases": Array [
+    Object {
+      "a": 1,
+    },
+    Object {
+      "a": undefined,
     },
   ],
 }
