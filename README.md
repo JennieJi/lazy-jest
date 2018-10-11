@@ -19,7 +19,7 @@ export function testFunction(a, b) {
   return a + b;
 }
 ```
-
+//happy hacking
 index.test.js
 ```javascript
 import { testFunction, enumerateArgsTestFunction, configArgs } from 'lazy-jest';
