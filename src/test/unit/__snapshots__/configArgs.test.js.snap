@@ -49,18 +49,9 @@ Args {
       "optional": true,
       "validCases": Array [
         Object {
-          "invalidCases": Array [],
-          "name": "b",
-          "validCases": Array [
-            Object {
-              "invalidCases": undefined,
-              "name": "c",
-              "optional": false,
-              "validCases": Array [
-                1,
-              ],
-            },
-          ],
+          "b": Object {
+            "c": 1,
+          },
         },
       ],
     },

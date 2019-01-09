@@ -12,16 +12,10 @@ Object {
   "invalidCases": Array [],
   "validCases": Array [
     Object {
-      "name": "a",
-      "validCases": Array [
-        1,
-      ],
+      "a": 0,
     },
     Object {
-      "name": "b",
-      "validCases": Array [
-        0,
-      ],
+      "b": 0,
     },
   ],
 }
@@ -36,22 +30,10 @@ Object {
   ],
   "validCases": Array [
     Object {
-      "invalidCases": undefined,
-      "name": "a",
-      "optional": false,
-      "validCases": Array [
-        1,
-      ],
+      "a": 0,
     },
     Object {
-      "invalidCases": Array [
-        null,
-      ],
-      "name": "b",
-      "optional": false,
-      "validCases": Array [
-        0,
-      ],
+      "b": 0,
     },
   ],
 }
@@ -62,12 +44,7 @@ Object {
   "invalidCases": Array [],
   "validCases": Array [
     Object {
-      "invalidCases": undefined,
-      "name": "a",
-      "optional": false,
-      "validCases": Array [
-        1,
-      ],
+      "a": 1,
     },
     Object {
       "a": 1,
@@ -86,20 +63,10 @@ Object {
   "invalidCases": Array [],
   "validCases": Array [
     Object {
-      "invalidCases": undefined,
-      "name": "a",
-      "optional": false,
-      "validCases": Array [
-        1,
-      ],
+      "a": 0,
     },
     Object {
-      "invalidCases": undefined,
-      "name": "b",
-      "optional": false,
-      "validCases": Array [
-        0,
-      ],
+      "b": 0,
     },
   ],
 }
@@ -142,12 +109,7 @@ Object {
   "invalidCases": Array [],
   "validCases": Array [
     Object {
-      "invalidCases": undefined,
-      "name": "a",
-      "optional": false,
-      "validCases": Array [
-        1,
-      ],
+      "a": 1,
     },
   ],
 }
@@ -162,14 +124,7 @@ Object {
   ],
   "validCases": Array [
     Object {
-      "invalidCases": Array [
-        null,
-      ],
-      "name": "a",
-      "optional": false,
-      "validCases": Array [
-        1,
-      ],
+      "a": 1,
     },
   ],
 }

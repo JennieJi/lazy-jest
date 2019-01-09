@@ -101,7 +101,7 @@ const configObjectArg = (propsConfig: Args | ArgConfig[]) => {
     );
   });
   return {
-    validCases: [...compulsoryProps, ...optionalValidCases],
+    validCases: [...compulsoryValidCases, ...optionalValidCases],
     invalidCases: [...compulsoryInvalidCases, ...optionalInvalidCases]
   };
 };
