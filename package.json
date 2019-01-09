@@ -1,6 +1,6 @@
 {
   "name": "lazy-jest",
-  "version": "0.1.0-beta.4",
+  "version": "0.1.0-beta.5",
   "description": "Jest util for lazy person like me to generate mass test snapshots with few configurations.",
   "main": "dist/lazy-jest.js",
   "browser": "dist/lazy-jest.umd.js",
