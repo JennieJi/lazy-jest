@@ -2,46 +2,17 @@
   "ignore": [
     "node_modules/**"
   ],
-  "env": {
-    "production": {
-      "presets": [
-        [
-          "env",
-          {
-            "targets": {
-              "browsers": ["last 2 versions", "safari >= 7"]
-            },
-            "modules": false
-          }
-        ]
-      ],
-      "plugins": [
-        "transform-flow-strip-types",
-        "transform-object-rest-spread",
-        "external-helpers"
-      ]
-    },
-    "testing": {
-      "presets": [
-        [
-          "env",
-          {
-            "targets": {
-              "browsers": ["last 2 versions", "safari >= 7"]
-            }
-          }
-        ]
-      ],
-      "plugins": [
-        "transform-flow-strip-types",
-        "transform-object-rest-spread"
-      ]
-    },
-    "docs": {
-      "plugins": [
-        "transform-flow-strip-types",
-        "transform-object-rest-spread"
-      ]
-    }
-  }
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": ["last 2 versions", "safari >= 7"]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-flow-strip-types"
+  ]
 }

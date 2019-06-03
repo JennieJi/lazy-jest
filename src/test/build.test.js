@@ -1,9 +1,5 @@
 import * as cjs from '../../dist/lazy-jest';
 import cjsDefault from '../../dist/lazy-jest';
-import * as umd from '../../dist/lazy-jest.umd';
-import umdDefault from '../../dist/lazy-jest.umd';
-import * as esm from '../../dist/lazy-jest.esm';
-import esmDefault from '../../dist/lazy-jest.esm';
 import * as src from '../index';
 import srcDefault from '../index';
 
@@ -25,17 +21,5 @@ describe('builds', () => {
   });
   test('cjsDefault', () => {
     expect(Object.keys(cjsDefault).sort(sortByAlphabet)).toEqual(structDefault);
-  });
-  test('umd', () => {
-    expect(Object.keys(umd).sort(sortByAlphabet)).toEqual(struct);
-  });
-  test('umdDefault', () => {
-    expect(Object.keys(umdDefault).sort(sortByAlphabet)).toEqual(structDefault);
-  });
-  test('esm', () => {
-    expect(Object.keys(esm).sort(sortByAlphabet)).toEqual(struct);
-  });
-  test('esmDefault', () => {
-    expect(Object.keys(esmDefault).sort(sortByAlphabet)).toEqual(structDefault);
   });
 });
