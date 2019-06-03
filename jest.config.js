@@ -11,5 +11,5 @@ module.exports =  {
   "coverageReporters": [
     "text-lcov"
   ],
-  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.js$"
+  "testRegex": "(/__tests__/.*|(\\.|/)test)\\.js$"
 };
