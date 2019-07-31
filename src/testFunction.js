@@ -57,8 +57,9 @@ export const testFunction = (
   argsCases?: ArgsCase[] = [],
   testCaption?: string = `${func.name || 'function'}()`
 ) => {
+  if (!argsCases) { return; }
   describe(testCaption, () => {
-    if (argsCases && argsCases.length) {
+    if (argsCases.length) {
       argsCases.forEach(c => doTest(func, c));
     } else {
       doTest(func);
@@ -77,8 +78,10 @@ const testInvalidArgs = (func: Function, argsConfig: ArgConfig[]) => {
   const argNames = argsConfig.map(conf => conf.name);
   argsConfig.forEach((conf, i) => {
     const cases = enumerateArrayCases(argsConfig, i);
-    const testCaption = `${formatArgCaseDesc(argNames)}, argument <${conf.name}> is invalid`;
-    testFunction(func, cases, testCaption);
+    if (cases && cases.length) {
+      const testCaption = `${formatArgCaseDesc(argNames)}, argument <${conf.name}> is invalid`;
+      testFunction(func, cases, testCaption);
+    }
   });
 };
 
@@ -150,7 +153,8 @@ export const enumerateArgsTestFunction = (
   const compulsoryArgs = CONF.slice(0, optionalStartIndex);
 
   describe(testCaption, () => {
-    for (let n = optionalArgs.length + 1; n--; ) {
+    let n = optionalArgs.length;
+    do {
       const testArgsConfig = compulsoryArgs.concat(optionalArgs.slice(0, n));
       if (testArgsConfig.length) {
         testInvalidArgs(func, testArgsConfig);
@@ -158,6 +162,6 @@ export const enumerateArgsTestFunction = (
       } else {
         doTest(func);
       }
-    }
+    } while (n--);
   });
 };
