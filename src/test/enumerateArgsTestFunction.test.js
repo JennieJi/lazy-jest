@@ -11,8 +11,16 @@ describe('function has compulsory args only', () => {
   enumerateArgsTestFunction(
     myFunc,
     configArgs()
+      .arg('a', [0, 1])
+      .arg('b', [-1, 99999]),
+    'no invalid case'
+  );
+  enumerateArgsTestFunction(
+    myFunc,
+    configArgs()
       .arg('a', [0, 1], { invalidCases: [NaN, null, ''] })
-      .arg('b', [-1, 99999], { invalidCases: [NaN, null, ''] })
+      .arg('b', [-1, 99999], { invalidCases: [NaN, null, ''] }),
+    'has invalid cases'
   );
 });
 
