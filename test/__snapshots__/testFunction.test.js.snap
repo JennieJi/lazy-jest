@@ -4,14 +4,14 @@ exports[`empty arg function custom test caption - () 1`] = `"Success!"`;
 
 exports[`empty arg function emptyArgFunc() - () 1`] = `"Success!"`;
 
-exports[`function will throw funcWillThrow() - () 1`] = `"Error!"`;
-
-exports[`function with args multiArgsFunc() - ("0",1) 1`] = `"01"`;
+exports[`function will throw funcWillThrow() - () 1`] = `"error"`;
 
 exports[`function with args multiArgsFunc() - () 1`] = `NaN`;
 
-exports[`function with args multiArgsFunc() - (0,1) 1`] = `1`;
+exports[`function with args multiArgsFunc() - ["0", 1] 1`] = `"01"`;
 
-exports[`function with args multiArgsFunc() - (NaN) 1`] = `NaN`;
+exports[`function with args multiArgsFunc() - [0, 1] 1`] = `1`;
 
-exports[`function with args multiArgsFunc() - (null,1) 1`] = `1`;
+exports[`function with args multiArgsFunc() - [NaN] 1`] = `NaN`;
+
+exports[`function with args multiArgsFunc() - [null, 1] 1`] = `1`;

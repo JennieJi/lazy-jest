@@ -1,65 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`function has compulsory args only has invalid cases - ("a","b") - (0,-1) 1`] = `-1`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) - [0, -1] 1`] = `-1`;
 
-exports[`function has compulsory args only has invalid cases - ("a","b") - (0,99999) 1`] = `99999`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) - [0, 99999] 1`] = `99999`;
 
-exports[`function has compulsory args only has invalid cases - ("a","b") - (1,-1) 1`] = `0`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) - [1, -1] 1`] = `0`;
 
-exports[`function has compulsory args only has invalid cases - ("a","b") - (1,99999) 1`] = `100000`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) - [1, 99999] 1`] = `100000`;
 
-exports[`function has compulsory args only has invalid cases - ("a","b"), argument <a> is invalid - ("",-1) 1`] = `"-1"`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) argument <a> is invalid - ["", -1] 1`] = `"-1"`;
 
-exports[`function has compulsory args only has invalid cases - ("a","b"), argument <a> is invalid - (NaN,-1) 1`] = `NaN`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) argument <a> is invalid - [NaN, -1] 1`] = `NaN`;
 
-exports[`function has compulsory args only has invalid cases - ("a","b"), argument <a> is invalid - (null,-1) 1`] = `-1`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) argument <a> is invalid - [null, -1] 1`] = `-1`;
 
-exports[`function has compulsory args only has invalid cases - ("a","b"), argument <b> is invalid - (0,"") 1`] = `"0"`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) argument <b> is invalid - [0, ""] 1`] = `"0"`;
 
-exports[`function has compulsory args only has invalid cases - ("a","b"), argument <b> is invalid - (0,NaN) 1`] = `NaN`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) argument <b> is invalid - [0, NaN] 1`] = `NaN`;
 
-exports[`function has compulsory args only has invalid cases - ("a","b"), argument <b> is invalid - (0,null) 1`] = `0`;
+exports[`function has compulsory args only has invalid cases - (["a", "b"]) argument <b> is invalid - [0, null] 1`] = `0`;
 
-exports[`function has compulsory args only no invalid case - ("a","b") - (0,-1) 1`] = `-1`;
+exports[`function has compulsory args only no invalid case - (["a", "b"]) - [0, -1] 1`] = `-1`;
 
-exports[`function has compulsory args only no invalid case - ("a","b") - (0,99999) 1`] = `99999`;
+exports[`function has compulsory args only no invalid case - (["a", "b"]) - [0, 99999] 1`] = `99999`;
 
-exports[`function has compulsory args only no invalid case - ("a","b") - (1,-1) 1`] = `0`;
+exports[`function has compulsory args only no invalid case - (["a", "b"]) - [1, -1] 1`] = `0`;
 
-exports[`function has compulsory args only no invalid case - ("a","b") - (1,99999) 1`] = `100000`;
+exports[`function has compulsory args only no invalid case - (["a", "b"]) - [1, 99999] 1`] = `100000`;
 
-exports[`function has optional args myFunc() - ("a") - (0) 1`] = `0`;
+exports[`function has optional args myFunc() - (["a", "b"]) - [0, -1] 1`] = `-1`;
 
-exports[`function has optional args myFunc() - ("a") - (1) 1`] = `1`;
+exports[`function has optional args myFunc() - (["a", "b"]) - [0, 99999] 1`] = `99999`;
 
-exports[`function has optional args myFunc() - ("a"), argument <a> is invalid - ("") 1`] = `"0"`;
+exports[`function has optional args myFunc() - (["a", "b"]) - [0, undefined] 1`] = `0`;
 
-exports[`function has optional args myFunc() - ("a"), argument <a> is invalid - (NaN) 1`] = `NaN`;
+exports[`function has optional args myFunc() - (["a", "b"]) - [1, -1] 1`] = `0`;
 
-exports[`function has optional args myFunc() - ("a"), argument <a> is invalid - (null) 1`] = `0`;
+exports[`function has optional args myFunc() - (["a", "b"]) - [1, 99999] 1`] = `100000`;
 
-exports[`function has optional args myFunc() - ("a","b") - (0,-1) 1`] = `-1`;
+exports[`function has optional args myFunc() - (["a", "b"]) - [1, undefined] 1`] = `1`;
 
-exports[`function has optional args myFunc() - ("a","b") - (0,99999) 1`] = `99999`;
+exports[`function has optional args myFunc() - (["a", "b"]) argument <a> is invalid - ["", -1] 1`] = `"-1"`;
 
-exports[`function has optional args myFunc() - ("a","b") - (0,undefined) 1`] = `0`;
+exports[`function has optional args myFunc() - (["a", "b"]) argument <a> is invalid - [NaN, -1] 1`] = `NaN`;
 
-exports[`function has optional args myFunc() - ("a","b") - (1,-1) 1`] = `0`;
+exports[`function has optional args myFunc() - (["a", "b"]) argument <a> is invalid - [null, -1] 1`] = `-1`;
 
-exports[`function has optional args myFunc() - ("a","b") - (1,99999) 1`] = `100000`;
+exports[`function has optional args myFunc() - (["a", "b"]) argument <b> is invalid - [0, ""] 1`] = `"0"`;
 
-exports[`function has optional args myFunc() - ("a","b") - (1,undefined) 1`] = `1`;
+exports[`function has optional args myFunc() - (["a", "b"]) argument <b> is invalid - [0, NaN] 1`] = `NaN`;
 
-exports[`function has optional args myFunc() - ("a","b"), argument <a> is invalid - ("",-1) 1`] = `"-1"`;
+exports[`function has optional args myFunc() - (["a", "b"]) argument <b> is invalid - [0, null] 1`] = `0`;
 
-exports[`function has optional args myFunc() - ("a","b"), argument <a> is invalid - (NaN,-1) 1`] = `NaN`;
+exports[`function has optional args myFunc() - (["a"]) - [0] 1`] = `0`;
 
-exports[`function has optional args myFunc() - ("a","b"), argument <a> is invalid - (null,-1) 1`] = `-1`;
+exports[`function has optional args myFunc() - (["a"]) - [1] 1`] = `1`;
 
-exports[`function has optional args myFunc() - ("a","b"), argument <b> is invalid - (0,"") 1`] = `"0"`;
+exports[`function has optional args myFunc() - (["a"]) argument <a> is invalid - [""] 1`] = `"0"`;
 
-exports[`function has optional args myFunc() - ("a","b"), argument <b> is invalid - (0,NaN) 1`] = `NaN`;
+exports[`function has optional args myFunc() - (["a"]) argument <a> is invalid - [NaN] 1`] = `NaN`;
 
-exports[`function has optional args myFunc() - ("a","b"), argument <b> is invalid - (0,null) 1`] = `0`;
+exports[`function has optional args myFunc() - (["a"]) argument <a> is invalid - [null] 1`] = `0`;
 
-exports[`function with empty args emptyArgsFunc() - () 1`] = `"Success!"`;
+exports[`function with empty args emptyArgsFunc() - ([]) - () 1`] = `"Success!"`;

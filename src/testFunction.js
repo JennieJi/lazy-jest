@@ -1,17 +1,11 @@
 // @flow
 import type { Case, ArgConfig } from './index.flow';
 import type { Args } from './caseGenerator/configArgs';
-import { matchSnapshot } from './utils';
 import enumerateArrayCases from './caseGenerator/enumerateArrayCases';
 /** @module testFunction */
 
 type ArgsCase = Case[];
 
-/**
- * @private
- * @param {Array.<*>} args 
- * @return {string}
- */
 const formatArgCaseDesc = (args: ArgsCase) => {
   const strArgs = args.map(arg => {
     if (typeof arg === 'undefined') {
@@ -28,16 +22,34 @@ const formatArgCaseDesc = (args: ArgsCase) => {
   return `- (${strArgs.join(',')})`;
 };
 
-/**
- * @private
- * @param {Function} func 
- * @param {Array.<*>} args 
- */
-const doTest = (func: Function, args: ArgsCase = []) => {
-  test(formatArgCaseDesc(args), () => {
-    matchSnapshot(() => func(...args));
+const mayThrowWrapper = async (func: Function, args: any[] = []) => {
+  try {
+   const ret = func.apply(null, args);
+   if (ret.then) {
+     return await ret;
+   }
+   return ret;
+  } catch (e) {
+    console.warn(e);
+    return 'error';
+  }
+};
+
+const testNoArgs = (func: Function) => {
+  test('- ()', async () => {
+    const ret = await mayThrowWrapper(func);
+    expect(ret).toMatchSnapshot();
   });
 };
+const testArgList = (func: Function, argsList: ArgsCase[] = []) => {
+  test.each(argsList.map(args => [args]))(
+    '- %p',
+    async (args: any[]) => {
+      const ret = await mayThrowWrapper(func, args);
+      expect(ret).toMatchSnapshot();
+    }
+  );
+}
 
 /**
  * 
@@ -60,9 +72,9 @@ export const testFunction = (
   if (!argsCases) { return; }
   describe(testCaption, () => {
     if (argsCases.length) {
-      argsCases.forEach(c => doTest(func, c));
+      testArgList(func, argsCases);
     } else {
-      doTest(func);
+      testNoArgs(func);
     }
   });
 };
@@ -76,13 +88,21 @@ export const testFunction = (
  */
 const testInvalidArgs = (func: Function, argsConfig: ArgConfig[]) => {
   const argNames = argsConfig.map(conf => conf.name);
-  argsConfig.forEach((conf, i) => {
+  const testConfigs = argsConfig.map((conf, i) => {
     const cases = enumerateArrayCases(argsConfig, i);
-    if (cases && cases.length) {
-      const testCaption = `${formatArgCaseDesc(argNames)}, argument <${conf.name}> is invalid`;
-      testFunction(func, cases, testCaption);
-    }
-  });
+    return cases && cases.length ? [
+      `argument <${conf.name}> is invalid`,
+      cases
+    ] : null;
+  }).filter(conf => !!conf);
+  if (testConfigs.length) {
+    describe.each(testConfigs)(
+      '%s',
+      (_name, cases) => {
+        testArgList(func, cases);
+      }
+    );
+  }
 };
 
 /**
@@ -93,10 +113,14 @@ const testInvalidArgs = (func: Function, argsConfig: ArgConfig[]) => {
  */
 const testValidArgs = (func: Function, argsConfig: ArgConfig[]) => {
   const cases = enumerateArrayCases(argsConfig);
-  const argNames = argsConfig.map(conf => conf.name);
-  const testCaption = formatArgCaseDesc(argNames);
-  testFunction(func, cases.length ? cases : [], testCaption);
+  if (cases.length) {
+    testArgList(func, cases);
+  } else {
+    testNoArgs(func);
+  }
 };
+
+const getArgNames = (argsConfig: ArgConfig[]) => argsConfig.map(conf => conf.name);
 
 /**
  * Catch snapshot of a function. It will do following tests:
@@ -151,17 +175,29 @@ export const enumerateArgsTestFunction = (
   }
   const optionalArgs = CONF.slice(optionalStartIndex);
   const compulsoryArgs = CONF.slice(0, optionalStartIndex);
-
+  const testConfig = optionalArgs.reduce((config, optionalArg) => {
+    const [lastArgs, last] = config[config.length - 1];
+    const newArgs = last.concat(optionalArg);
+    return [
+      ...config,
+      [getArgNames(newArgs), newArgs]
+    ];
+  }, [[getArgNames(compulsoryArgs), compulsoryArgs]]);
   describe(testCaption, () => {
-    let n = optionalArgs.length;
-    do {
-      const testArgsConfig = compulsoryArgs.concat(optionalArgs.slice(0, n));
-      if (testArgsConfig.length) {
-        testInvalidArgs(func, testArgsConfig);
-        testValidArgs(func, testArgsConfig);
-      } else {
-        doTest(func);
-      }
-    } while (n--);
+    if (testConfig.length) {
+      describe.each(testConfig)(
+        '- (%p)', 
+        (_argNames, config) => {
+          if (config.length) {
+            testInvalidArgs(func, config);
+            testValidArgs(func, config);
+          } else {
+            testNoArgs(func);
+          }
+        }
+      );
+    } else {
+      testNoArgs(func);
+    }
   });
 };

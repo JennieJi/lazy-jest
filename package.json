@@ -3,9 +3,10 @@
   "version": "0.1.0-beta.6",
   "description": "Jest util for lazy person like me to generate mass test snapshots with few configurations.",
   "main": "dist/lazy-jest.js",
+  "module": "dist/es/index.js",
   "scripts": {
     "prepublishOnly": "npm run docs & npm run build && yarn test",
-    "build": "webpack",
+    "build": "rm -rf dist && webpack && babel -d dist/es src/**/*.js",
     "docs": "jsdoc2md --template README.hbs 'src/**/*.js' > README.md --separators -c ./.jsdoc.json",
     "test": "BABLE_ENV=test jest --env=node",
     "test:coverage": "yarn test --coverage --coverageReporters=lcov"
@@ -24,9 +25,10 @@
     "jest": "^24.8.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.1.0",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
     "@babel/plugin-transform-flow-strip-types": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.1.0",
     "babel-loader": "^8.0.6",
     "flow-bin": "^0.81.0",
@@ -48,5 +50,8 @@
   },
   "bugs": {
     "url": "https://github.com/JennieJi/lazy-jest/issues"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.5.5"
   }
 }
