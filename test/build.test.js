@@ -1,7 +1,7 @@
-import * as cjs from '../../dist/lazy-jest';
-import cjsDefault from '../../dist/lazy-jest';
-import * as src from '../index';
-import srcDefault from '../index';
+import * as cjs from '../dist/lazy-jest';
+import cjsDefault from '../dist/lazy-jest';
+import * as src from '../src/index';
+import srcDefault from '../src/index';
 
 const sortByAlphabet = (a, b) => a.localeCompare(b);
 

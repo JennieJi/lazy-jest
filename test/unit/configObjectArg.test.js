@@ -1,5 +1,5 @@
-import configObjectArg from '../../caseGenerator/configObjectArg';
-import configArgs from '../../caseGenerator/configArgs';
+import configObjectArg from '../../src/caseGenerator/configObjectArg';
+import configArgs from '../../src/caseGenerator/configArgs';
 
 describe('configObjectArg', () => {
   test('empty object', () => {

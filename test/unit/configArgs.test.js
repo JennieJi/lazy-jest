@@ -1,4 +1,4 @@
-import configArgs from '../../caseGenerator/configArgs';
+import configArgs from '../../src/caseGenerator/configArgs';
 
 describe('configArgs', () => {
   test('empty args', () => {
