@@ -43,7 +43,7 @@ const testNoArgs = (func: Function) => {
 };
 const testArgList = (func: Function, argsList: ArgsCase[] = []) => {
   test.each(argsList.map(args => [args]))(
-    '- %p',
+    '- %j',
     async (args: any[]) => {
       const ret = await mayThrowWrapper(func, args);
       expect(ret).toMatchSnapshot();
