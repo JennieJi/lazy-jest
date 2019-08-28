@@ -2,18 +2,28 @@
   "ignore": [
     "node_modules/**"
   ],
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "browsers": ["last 2 versions", "safari >= 7"]
-        }
-      }
-    ]
-  ],
   "plugins": [
     "@babel/plugin-transform-flow-strip-types",
     "@babel/plugin-transform-runtime"
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        ["@babel/preset-env"]
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "modules": false,
+            "targets": {
+              "browsers": ["last 2 versions", "safari >= 7"]
+            }
+          }
+        ]
+      ]
+    }
+  }
 }

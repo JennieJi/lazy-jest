@@ -6,7 +6,7 @@
   "module": "dist/es/index.js",
   "scripts": {
     "prepublishOnly": "npm run docs & npm run build && yarn test",
-    "build": "rm -rf dist && webpack && babel -d dist/es src/**/*.js",
+    "build": "BABLE_ENV=production rm -rf dist && webpack && babel -d dist/es src/**/*.js",
     "docs": "jsdoc2md --template README.hbs 'src/**/*.js' > README.md --separators -c ./.jsdoc.json",
     "test": "BABLE_ENV=test jest --env=node",
     "test:coverage": "yarn test --coverage --coverageReporters=lcov"
