@@ -1,16 +1,11 @@
 // @flow
-import { testFunction, enumerateArgsTestFunction } from './testFunction';
-import { enumerateArrayCases, enumerateCases, configArgs, configObjectArg } from './caseGenerator';
+const { testFunction, enumerateArgsTestFunction } = require('./testFunction');
+const enumerateArrayCases = require('./caseGenerator/enumerateArrayCases');
+const { enumerateCases }  = require('./caseGenerator/enumerateCases');
+const configArgs = require('./caseGenerator/configArgs');
+const configObjectArg = require('./caseGenerator/configObjectArg');
 
-export {
-  testFunction,
-  enumerateArgsTestFunction,
-  enumerateArrayCases,
-  enumerateCases,
-  configArgs,
-  configObjectArg
-};
-export default {
+module.exports = {
   testFunction,
   enumerateArgsTestFunction,
   enumerateArrayCases,

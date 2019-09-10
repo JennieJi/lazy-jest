@@ -1,5 +1,5 @@
-import configObjectArg from '../../src/caseGenerator/configObjectArg';
-import configArgs from '../../src/caseGenerator/configArgs';
+const configObjectArg = require('../../src/caseGenerator/configObjectArg');
+const configArgs = require('../../src/caseGenerator/configArgs');
 
 describe('configObjectArg', () => {
   test('empty object', () => {

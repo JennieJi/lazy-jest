@@ -1,6 +1,4 @@
-// @flow
-import type { Case, ArgConfig } from '../index.flow';
-import enumerateCases from './enumerateCases';
+const { enumerateCases } = require('./enumerateCases');
 /** @module caseGenerator/enumerateArrayCases */
 
 /**
@@ -15,9 +13,9 @@ import enumerateCases from './enumerateCases';
  * extendArrayCase([[1], [2]], 3);  // Result: [[1, 3], [2, 3]]
  */
 const extendArrayCase = (
-  existingCases: Case[][],
-  nextItemCase: Case
-): Case[][] => {
+  existingCases,
+  nextItemCase
+) => {
   return existingCases.length
     ? existingCases.map(c => [...c, nextItemCase])
     : [[nextItemCase]];
@@ -31,4 +29,4 @@ const extendArrayCase = (
  * @return {Array<Array<*>|Object>} 
  */
 const enumerateArrayCases = enumerateCases.bind(null, extendArrayCase);
-export default enumerateArrayCases;
+module.exports = enumerateArrayCases;

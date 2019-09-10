@@ -1,4 +1,4 @@
-import { testFunction } from '../src/testFunction';
+const { testFunction } = require('../src/testFunction');
 
 describe('empty arg function', () => {
   const emptyArgFunc = () => 'Success!';

@@ -1,12 +1,9 @@
 // @flow
-import type { Case, ArgConfig } from './index.flow';
-import type { Args } from './caseGenerator/configArgs';
-import enumerateArrayCases from './caseGenerator/enumerateArrayCases';
+const enumerateArrayCases = require('./caseGenerator/enumerateArrayCases');
 /** @module testFunction */
 
-type ArgsCase = Case[];
 
-const formatArgCaseDesc = (args: ArgsCase) => {
+const formatArgCaseDesc = (args) => {
   const strArgs = args.map(arg => {
     if (typeof arg === 'undefined') {
       return 'undefined';
@@ -22,29 +19,29 @@ const formatArgCaseDesc = (args: ArgsCase) => {
   return `- (${strArgs.join(',')})`;
 };
 
-const mayThrowWrapper = async (func: Function, args: any[] = []) => {
+const mayThrowWrapper = async (func, args = []) => {
   try {
-   const ret = func.apply(null, args);
-   if (ret.then) {
-     return await ret;
-   }
-   return ret;
+    const ret = func.apply(null, args);
+    if (ret.then) {
+      return await ret;
+    }
+    return ret;
   } catch (e) {
     console.warn(e);
     return 'error';
   }
 };
 
-const testNoArgs = (func: Function) => {
+const testNoArgs = (func) => {
   test('- ()', async () => {
     const ret = await mayThrowWrapper(func);
     expect(ret).toMatchSnapshot();
   });
 };
-const testArgList = (func: Function, argsList: ArgsCase[] = []) => {
+const testArgList = (func, argsList = []) => {
   test.each(argsList.map(args => [args]))(
     '- %j',
-    async (args: any[]) => {
+    async (args) => {
       const ret = await mayThrowWrapper(func, args);
       expect(ret).toMatchSnapshot();
     }
@@ -64,10 +61,10 @@ const testArgList = (func: Function, argsList: ArgsCase[] = []) => {
  *  []
  * ], 'custom combination test of targetFunction()');
  */
-export const testFunction = (
-  func: Function,
-  argsCases?: ArgsCase[] = [],
-  testCaption?: string = `${func.name || 'function'}()`
+const testFunction = (
+  func,
+  argsCases = [],
+  testCaption = `${func.name || 'function'}()`
 ) => {
   if (!argsCases) { return; }
   describe(testCaption, () => {
@@ -86,7 +83,7 @@ export const testFunction = (
  * @param {Function} func Target function
  * @param {ArgConfig[]} argsConfig
  */
-const testInvalidArgs = (func: Function, argsConfig: ArgConfig[]) => {
+const testInvalidArgs = (func, argsConfig) => {
   const argNames = argsConfig.map(conf => conf.name);
   const testConfigs = argsConfig.map((conf, i) => {
     const cases = enumerateArrayCases(argsConfig, i);
@@ -111,7 +108,7 @@ const testInvalidArgs = (func: Function, argsConfig: ArgConfig[]) => {
  * @param {Function} func  Target function
  * @param {ArgConfig[]} argsConfig
  */
-const testValidArgs = (func: Function, argsConfig: ArgConfig[]) => {
+const testValidArgs = (func, argsConfig) => {
   const cases = enumerateArrayCases(argsConfig);
   if (cases.length) {
     testArgList(func, cases);
@@ -120,7 +117,7 @@ const testValidArgs = (func: Function, argsConfig: ArgConfig[]) => {
   }
 };
 
-const getArgNames = (argsConfig: ArgConfig[]) => argsConfig.map(conf => conf.name);
+const getArgNames = (argsConfig) => argsConfig.map(conf => conf.name);
 
 /**
  * Catch snapshot of a function. It will do following tests:
@@ -160,10 +157,10 @@ const getArgNames = (argsConfig: ArgConfig[]) => argsConfig.map(conf => conf.nam
  *   )
  * );
  */
-export const enumerateArgsTestFunction = (
-  func: Function,
-  argsConfig: Args | ArgConfig[],
-  testCaption?: string = `${func.name || 'function'}()`
+const enumerateArgsTestFunction = (
+  func,
+  argsConfig,
+  testCaption = `${func.name || 'function'}()`
 ) => {
   const CONF = Array.isArray(argsConfig) ? argsConfig : argsConfig.value;
   let optionalStartIndex = CONF.length;
@@ -200,4 +197,9 @@ export const enumerateArgsTestFunction = (
       testNoArgs(func);
     }
   });
+};
+
+module.exports = {
+  testFunction,
+  enumerateArgsTestFunction
 };

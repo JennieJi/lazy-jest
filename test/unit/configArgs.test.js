@@ -1,4 +1,4 @@
-import configArgs from '../../src/caseGenerator/configArgs';
+const configArgs = require('../../src/caseGenerator/configArgs');
 
 describe('configArgs', () => {
   test('empty args', () => {

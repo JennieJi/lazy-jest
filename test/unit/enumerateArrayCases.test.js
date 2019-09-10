@@ -1,4 +1,4 @@
-import enumerateArrayCases from '../../src/caseGenerator/enumerateArrayCases';
+const enumerateArrayCases = require('../../src/caseGenerator/enumerateArrayCases');
 
 describe('enumerateArrayCases', () => {
   test('single arg, valid cases only', () => {

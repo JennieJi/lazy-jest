@@ -1,6 +1,4 @@
-// @flow
-import type { Case, ArgConfig } from '../index.flow';
-import configObjectArg from './configObjectArg';
+const configObjectArg = require('./configObjectArg');
 
 /** @module caseGenerator/configArgs */
 
@@ -10,14 +8,14 @@ import configObjectArg from './configObjectArg';
  * @param {ArgConfig} argConfig
  * @return {ArgConfig}
  */
-const validateArgConfig = (argConfig: ArgConfig) => {
+const validateArgConfig = (argConfig) => {
   let { validCases, invalidCases, optional, name } = argConfig;
   if (optional) {
     invalidCases = invalidCases
       ? invalidCases.filter(c => typeof c !== 'undefined')
       : void 0;
     if (!validCases.includes(void 0)) {
-      validCases = [...validCases, void 0];
+      validCases = validCases.concat(void 0);
     }
   }
   return {
@@ -31,12 +29,11 @@ const validateArgConfig = (argConfig: ArgConfig) => {
 /**
  * Class for argument configurations
  */
-export class Args {
-  value: ArgConfig[];
+class Args {
   /**
    * @param {ArgConfig[]} initialConfig
    */
-  constructor(initialConfig?: ArgConfig[]) {
+  constructor(initialConfig) {
     this.value = Array.isArray(initialConfig) ? initialConfig.map(validateArgConfig) : [];
   }
   /**
@@ -49,9 +46,9 @@ export class Args {
    * @return {this}
    */
   arg(
-    name: string,
-    validCases: Case[],
-    opts?: { optional?: boolean, invalidCases?: Case[] }
+    name,
+    validCases,
+    opts
   ) {
     this.value.push(
       validateArgConfig({
@@ -71,7 +68,7 @@ export class Args {
    * @prop {boolean} [opts.optional] 
    * @return {this}
    */
-  objectArg(name: string, propsConfig: Args, opts?: { optional?: boolean }) {
+  objectArg(name, propsConfig, opts) {
     this.value.push({
       ...configObjectArg(propsConfig),
       ...(opts || {}),
@@ -91,5 +88,5 @@ export class Args {
  * .arg('a', [0, 1, 2])
  * .arg('b', [-1, -2], { optional: true, invalidCases: [0] });
  */
-const configArgs = (initialConfig?: ArgConfig[]) => new Args(initialConfig);
-export default configArgs;
+const configArgs = (initialConfig) => new Args(initialConfig);
+module.exports = configArgs;

@@ -1,5 +1,5 @@
-import { enumerateArgsTestFunction } from '../src/testFunction';
-import { configArgs } from '../src/caseGenerator';
+const { enumerateArgsTestFunction } = require('../src/testFunction');
+const configArgs = require('../src/caseGenerator/configArgs');
 
 describe('function with empty args', () => {
   const emptyArgsFunc = () => 'Success!';

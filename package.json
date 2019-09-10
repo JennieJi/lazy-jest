@@ -2,13 +2,12 @@
   "name": "lazy-jest",
   "version": "0.1.0-beta.6",
   "description": "Jest util for lazy person like me to generate mass test snapshots with few configurations.",
-  "main": "dist/lazy-jest.js",
-  "module": "dist/es/index.js",
+  "main": "src/index.js",
+  "module": "src/index.js",
   "scripts": {
     "prepublishOnly": "npm run docs & npm run build && yarn test",
-    "build": "BABLE_ENV=production rm -rf dist && webpack && babel -d dist/es src/**/*.js",
     "docs": "jsdoc2md --template README.hbs 'src/**/*.js' > README.md --separators -c ./.jsdoc.json",
-    "test": "BABLE_ENV=test jest --env=node",
+    "test": "jest --env=node",
     "test:coverage": "yarn test --coverage --coverageReporters=lcov"
   },
   "keywords": [
@@ -25,20 +24,9 @@
     "jest": "^24.8.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-transform-flow-strip-types": "^7.4.4",
-    "@babel/plugin-transform-runtime": "^7.5.5",
-    "@babel/preset-env": "^7.1.0",
-    "babel-loader": "^8.0.6",
-    "flow-bin": "^0.81.0",
-    "flow-typed": "^2.5.1",
     "jest": "^24.8.0",
-    "jsdoc-babel": "^0.5.0",
     "jsdoc-to-markdown": "^5.0.0",
-    "prettier": "^1.14.0",
-    "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.6"
+    "prettier": "^1.14.0"
   },
   "author": {
     "name": "Jennie Ji",

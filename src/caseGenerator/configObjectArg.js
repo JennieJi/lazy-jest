@@ -1,10 +1,6 @@
-// @flow
-import type { Case, ArgConfig } from '../index.flow';
-import type { Args } from './configArgs';
-import { default as enumerateCases, appendArgCases } from './enumerateCases';
+const { enumerateCases, appendArgCases } = require('./enumerateCases');
 /** @module caseGenerator/configObjectArg */
 
-type ObjectCase = { [key: string]: Case };
 
 /**
  * Append a property to each object of a list. Similar to "setEach" in some functional programming lib.
@@ -16,8 +12,8 @@ type ObjectCase = { [key: string]: Case };
  * extendObjectCase('b')(cases, '');  // Result: [{ a: 1, b: '' }]
  * extendObjectCase('c')([{ a: 1 }, { b: '' }], []);  // Result: [{ a: 1, c: [] }, { b: '', c: [] }]
  */
-const extendObjectCase = (key: string) => {
-  return (exsistingCases: ObjectCase[], nextArgCase: Case): ObjectCase[] => {
+const extendObjectCase = (key) => {
+  return (exsistingCases, nextArgCase) => {
     if (exsistingCases.length) {
       return exsistingCases.map(c => {
         return { ...c, [key]: nextArgCase };
@@ -38,13 +34,13 @@ const extendObjectCase = (key: string) => {
   * @param {string} key
   * @return {Function}
   */
-const getTestCases = (key: string) => enumerateCases.bind(null, extendObjectCase(key));
+const getTestCases = (key) => enumerateCases.bind(null, extendObjectCase(key));
 /**
  * @private
  * @param {string} key
  * @return {Function}
  */
-const appendTestCases = (key: string) => appendArgCases.bind(null, extendObjectCase(key));
+const appendTestCases = (key) => appendArgCases.bind(null, extendObjectCase(key));
 
 /**
  * A helper to generate object test cases by provided configurations
@@ -72,7 +68,7 @@ const appendTestCases = (key: string) => appendArgCases.bind(null, extendObjectC
  * //   ]
  * // }
  */
-const configObjectArg = (propsConfig: Args | ArgConfig[]) => {
+const configObjectArg = (propsConfig) => {
   const props = Array.isArray(propsConfig) ? propsConfig : propsConfig.value;
   const compulsoryProps = props.filter(conf => !conf.optional);
   const optionalProps = props.filter(conf => conf.optional);
@@ -106,4 +102,4 @@ const configObjectArg = (propsConfig: Args | ArgConfig[]) => {
   };
 };
 
-export default configObjectArg;
+module.exports = configObjectArg;

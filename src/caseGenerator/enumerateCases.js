@@ -1,5 +1,3 @@
-// @flow
-import type { ArgConfig } from '../index.flow';
 /** @module caseGenerator/enumerateCases */
 
 /**
@@ -13,15 +11,15 @@ import type { ArgConfig } from '../index.flow';
  * appendArgCases(extendArrayCase, [], [2, 3]);  // Result: [[2], [3]],
  * appendArgCases(extendArrayCase, [[0], [1]], [2, 3]);  // Result: [[0, 2], [1, 2], [1, 2], [1, 3]],
  */
-export const appendArgCases = <C>(
-  appendMethod: (cases: C[], nextArgCase: any) => C[],
-  cases: C[],
-  nextArgCases: any[]
-): C[] => {
-  return nextArgCases.reduce((appendedCases, nextArgCase): C[] => {
+const appendArgCases = (
+  appendMethod,
+  cases,
+  nextArgCases
+) => {
+  return nextArgCases.reduce((appendedCases, nextArgCase) => {
     const newCases = appendMethod(cases, nextArgCase);
     return appendedCases.concat(newCases);
-  }, ([]: C[]));
+  }, []);
 };
 
 /**
@@ -56,11 +54,11 @@ export const appendArgCases = <C>(
  * ], 0);
  * // Result: [[false], [0], [false, 1], [0, 1]]
  */
-const enumerateCases = <C>(
-  appendMethod: (cases: C[], nextArgCase: any) => C[],
-  argsConfig: ArgConfig[],
-  invalidArgConfigIndex?: number
-): C[] => {
+const enumerateCases = (
+  appendMethod,
+  argsConfig,
+  invalidArgConfigIndex
+) => {
   const invalidArgConf =
     typeof invalidArgConfigIndex === 'number'
       ? argsConfig[invalidArgConfigIndex]
@@ -69,7 +67,7 @@ const enumerateCases = <C>(
   if (invalidArgConf && (!invalidCases || !invalidCases.length)) {
     return [];
   }
-  return argsConfig.reduce((processedCases: C[], conf, i): C[] => {
+  return argsConfig.reduce((processedCases, conf, i) => {
     if (i === invalidArgConfigIndex) {
       return appendArgCases(appendMethod, processedCases, invalidCases || []);
     }
@@ -89,4 +87,8 @@ const enumerateCases = <C>(
  * @param {*} nextArgCase
  * @return {Array<Array<*>|Object>}
  */
-export default enumerateCases;
+
+ module.exports = {
+  appendArgCases,
+  enumerateCases
+ };
