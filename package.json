@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "module": "src/index.js",
   "scripts": {
-    "prepublishOnly": "npm run docs & npm run build && yarn test",
+    "prepublishOnly": "npm run docs && yarn test",
     "docs": "jsdoc2md --template README.hbs 'src/**/*.js' > README.md --separators -c ./.jsdoc.json",
     "test": "jest --env=node",
     "test:coverage": "yarn test --coverage --coverageReporters=lcov"
@@ -17,7 +17,7 @@
     "javascript"
   ],
   "files": [
-    "dist/lazy-jest.js"
+    "src"
   ],
   "license": "MIT",
   "peerDependencies": {
@@ -39,8 +39,5 @@
   },
   "bugs": {
     "url": "https://github.com/JennieJi/lazy-jest/issues"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.5.5"
   }
 }
